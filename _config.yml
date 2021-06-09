@@ -1,0 +1,84 @@
+site: IBM Research syssec blog
+title: Syssec@IBM Research
+description: >-
+  Updates
+lang: en-US
+timezone: Zurich
+repo: https://github.com/IBM/system-security-research-updates # site repo [optional]
+data-theme: dark # default theme "dark" | "light"
+
+author:
+  name: p0wex
+  bio: just a minimalist, personal blog
+  username: p0wex # general username
+  github: p0wex # github username
+  twitter: P0Wex # twitter username
+  email: your-email@email.com # email adress
+
+# URL settings
+url: "https://ibm.github.io/" #
+baseurl: "/system-security-research-updates" # leave blank if not wishd
+permalink: "https://ibm.github.io/system-security-research-updates"
+permalink: pretty
+
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+
+exclude:
+  - .jekyll-cache
+  - .obsidian
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+  - CONTRIBUTING.md
+  
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-relative-links
+
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:slug
+  
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+relative_links:
+  enabled:     true
+  collections: false
+
+
