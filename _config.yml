@@ -26,6 +26,10 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  hard_wrap: false
+  syntax_highlighter_opts:
+      block:
+          line_numbers: true
 
 
 exclude:
@@ -39,7 +43,7 @@ exclude:
   
 compress_html:
   clippings: all
-  comments: ["<!-- ", " -->"]
+  comments: ["<!-- ", " -->", "<!---", "--->"]
 
 sass:
   sass_dir: _sass
