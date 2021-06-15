@@ -1,6 +1,8 @@
 ---
 title: SPEAR attacks - stack smashing protector bypass usecase
 tags: security transient-execution
+authors: ["Alexandra",  "Andrea", "Alessandro", "Anil"]
+
 ---
 # Bypassing stack smashing protection through speculative control flow hijacking
 This work demonstrates a local arbitrary read attack through speculative
@@ -133,8 +135,8 @@ We run an end-to-end exploit against the SSP-protected stack buffer overflow in
 `png_handle_tRNS`. Unlike traditional exploits where the attacker crafts the
 right payload and sends it to the victim, here we isolate the following attack
 preconditions:
-1. the CPU must mispredict on stack canary integrity check
-2. large speculation window (by stack canary eviction from all cache levels
+1. The CPU must mispredict on stack canary integrity check
+2. Large speculation window (by stack canary eviction from all cache levels
 before `png_handle_tRNS` canary check)
 
 For the first precondition, we rely on PHT training using a simple yet effective
@@ -240,9 +242,9 @@ For exactly one eviction set, A2 encounters a cache miss and reports it
 to A1. As a result, A1 obtains the LLC eviction set corresponding to
 A2's canary location[^llcorg].
 
-The rest of the canary eviction method is based on the observation that **the
+The rest of the canary eviction method is based on the observation that *the
 page frame used to store A2's canary, the TLS page[^tlspage], can be subsequently
-used by other processes in the system**, in some cases for the same purpose.
+used by other processes in the system*, in some cases for the same purpose.
 
 The second phase of canary eviction forces A2's TLS page to be reused by the
 target victim instance. Due to the deterministic behaviour of the Linux page
@@ -271,8 +273,8 @@ Page frame deallocation happens when a process drops a part (`madvise, munmap`)
 or releases its entire virtual memory (`exec`, `exit`). The deallocation order
 in the latter case is decided by
 [unmap_vmas](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L1576)[^unmapvmas].
-**Page frames are released in ascending order, based on their corresponding
-virtual address**. This also applies for the former case, although the order in
+*Page frames are released in ascending order, based on their corresponding
+virtual address*. This also applies for the former case, although the order in
 which the memory chunks drop happens contributes to the free lists layout.
 
 The final order in which page frames are placed in the free list is descending
@@ -331,12 +333,17 @@ The Spectre v1 gadget is essentially an array access where `array_base` and `sca
 fixed. The variable is `array_index` which represents the value of one victim
 secret byte.
 Thus, the ROP chain purpose is to:
-1. compute array address
+
+1. Compute array address
+
 {% highlight nasm linenos %}
 mov array_index, [victim_secret_address]
 address = array_base + scale x array_index
 {% endhighlight %}
-2. load address contents to transmit the side-channel send signal
+
+{:start="2"}
+2. Load address contents to transmit the side-channel send signal
+
 {% highlight nasm linenos %}
 mov reg, [address]
 {% endhighlight %}
@@ -472,64 +479,26 @@ For more information about SPEAR attacks, please refer to our [paper](https://ar
 
 ## References
 
-[^cve20040597]: We chose this particular CVE because it provides a large enough
-  out-of-bounds write to fit the attack payload. In practice the stack
-buffer overflow must allow overwrite of the return address which is
-sufficient for stack pivoting.
+[^cve20040597]: We chose this particular CVE because it provides a large enough out-of-bounds write to fit the attack payload. In practice the stack buffer overflow must allow overwrite of the return address which is sufficient for stack pivoting.
 
-[^spectrearray]: In the original Spectre paper, each element size is equal to PAGE_SIZE,
-to avoid probing noise. The noise source comes from adjacent cache lines being
-fetched together with the requested line. We experimented with different element
-sizes until we reached 256B which is low wrt probing noise and at the same time
-keeps the probing area relatively small (16 pages).
+[^spectrearray]: In the original Spectre paper, each element size is equal to PAGE_SIZE, to avoid probing noise. The noise source comes from adjacent cache lines being fetched together with the requested line. We experimented with different element sizes until we reached 256B which is low wrt probing noise and at the same time keeps the probing area relatively small (16 pages).
 
-[^llclayout]: Cache internals are not subject of this post, however it is important to
-describe the cache configuration of the experiments machine. The LLC (Last Level
-Cache) is 8MB in size. The CPU has 4 physical cores, therefore 8 virtual. As
-[latest research](https://www.usenix.org/system/files/sec20-briongos_0.pdf)
-claims and our experiments confirm, the number of corresponding LLC slices is 8.
+[^llclayout]: Cache internals are not subject of this post, however it is important to describe the cache configuration of the experiments machine. The LLC (Last Level Cache) is 8MB in size. The CPU has 4 physical cores, therefore 8 virtual. As [latest research](https://www.usenix.org/system/files/sec20-briongos_0.pdf) claims and our experiments confirm, the number of corresponding LLC slices is 8.
 
 [^llcorg]: LLC organization is based on the physical memory location of data.
 
-[^tlspage]: The TLS page is allocated at load time by `_dl_allocate_tls_storage` as
-part of the SSP initialization. The page allocation is followed by generation of
-canary value by `_dl_setup_stack_chk_guard`.
+[^tlspage]: The TLS page is allocated at load time by `_dl_allocate_tls_storage` as part of the SSP initialization. The page allocation is followed by generation of canary value by `_dl_setup_stack_chk_guard`.
 
-[^pagereuse]: For completeness, we analyzed both attacker-controlled and
-  independent victim startup scenarios. Apart from the attacker exec'd victim
-(attacker controlled), we characterised page reuse when:
-a) the victim process is a child of an attacker-controlled process;
-b) the victim process is independent.
-The attacker-controlled victim startup results in 100% success rate for the TLS
-page reuse if the attacker process can manipulate its runtime virtual memory space via `mmap`.
-Forcing a page reuse in an independent process in the system (b))
-depends on the attacker's ability to track victim's allocations. In Linux, the
-default behaviour allows monitoring (via `/proc`) the resident memory size of
-other processes with a granularity of 66 pages[^nestedrssmon].
+[^pagereuse]: For completeness, we analyzed both attacker-controlled and independent victim startup scenarios. Apart from the attacker exec'd victim (attacker controlled), we characterised page reuse when: a) the victim process is a child of an attacker-controlled process; b) the victim process is independent. The attacker-controlled victim startup results in 100% success rate for the TLS page reuse if the attacker process can manipulate its runtime virtual memory space via `mmap`. Forcing a page reuse in an independent process in the system (b)) depends on the attacker's ability to track victim's allocations. In Linux, the default behaviour allows monitoring (via `/proc`) the resident memory size of other processes with a granularity of 66 pages[^nestedrssmon].
 
-[^unmapvmas]: The call stack which leads to `unmap_vmas` depends on the initial action
-(`exit`, `execv`, `munmap`, `madvise`) of the userspace process.
+[^unmapvmas]: The call stack which leads to `unmap_vmas` depends on the initial action (`exit`, `execv`, `munmap`, `madvise`) of the userspace process.
 
-[^perftrace]: We obtained the
-call stacks by catching memory allocator events (`mm_page_alloc`,
-`mm_page_free`) using `perf`.
+[^perftrace]: We obtained the call stacks by catching memory allocator events (`mm_page_alloc`, `mm_page_free`) using `perf`.
 
-[^aslr]: ASLR (Address Space Layout Randomization) bypass is not covered by this work so we consider ASLR disabled.
-For a discussion on this matter, please refer to the [paper](https://arxiv.org/abs/2003.05503).
+[^aslr]: ASLR (Address Space Layout Randomization) bypass is not covered by this work so we consider ASLR disabled. For a discussion on this matter, please refer to the [paper](https://arxiv.org/abs/2003.05503).
 
-[^tlbrop]: The TLB is subject to replacement policies, thus not all pages returned by
-the tool have a valid TLB entry. We may end up with false positives, though
-the TLB size allows enough ROP gadget search space to build the Spectre v1 gadget.
+[^tlbrop]: The TLB is subject to replacement policies, thus not all pages returned by the tool have a valid TLB entry. We may end up with false positives, though the TLB size allows enough ROP gadget search space to build the Spectre v1 gadget.
 
-[^nestedrssmon]: Linux asynchronously updates the resident set size (RSS) via `sync_mm_rss` when
-enough events (page faults) occurred. The number of events chosen is 64
-([`TASK_RSS_EVENTS_THRESH`](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L171)),
-however, the RSS monitoring granularity found by our experiments is 66.
-The [code](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L176)
-checks if the counter is > 64, meaning that 65 events already happened. Next,
-the counter is incremented to count the current event (=>66). Lastly,
-[`sync_mm_rss`](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L145)
-is called.
+[^nestedrssmon]: Linux asynchronously updates the resident set size (RSS) via `sync_mm_rss` when enough events (page faults) occurred. The number of events chosen is 64 ([`TASK_RSS_EVENTS_THRESH`](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L171)), however, the RSS monitoring granularity found by our experiments is 66. The [code](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L176) checks if the counter is > 64, meaning that 65 events already happened. Next, the counter is incremented to count the current event (=>66). Lastly, [`sync_mm_rss`](https://elixir.bootlin.com/linux/v4.15/source/mm/memory.c#L145) is called.
 
-[^buddydocs]: For more on Linux allocator internals go
-  [here](https://www.kernel.org/doc/gorman/html/understand/understand009.html).
+[^buddydocs]: For more on Linux allocator internals go [here](https://www.kernel.org/doc/gorman/html/understand/understand009.html).

@@ -13,8 +13,19 @@ layout: default
   <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
   <h1 class="title">{{ page.title }}</h1>
   <span class="meta">
-    {% for tag in page.tags %}
-    <a href="{{ site.baseurl }}/tag/{{tag}}">{{tag}}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+      Author{% if page.authors.size > 1 %}s{% endif %}:
+      {% for author in page.authors %}
+        <a href="{{site.baseurl}}/about">{{author}}</a>{% unless forloop.last %},{% endunless %}
+      {% endfor%}
+      <br/><br />
+      {% if page.tags.size != 0 %}
+      Topic{% if page.tags.size > 1 %}s{% endif %}:
+        {% for tag in page.tags %}
+        <a href="{{ site.baseurl }}/tag/{{tag}}">{{tag}}</a>{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      {% endif %}
+  </span>
+
   {{ content }}
 </section>
 
