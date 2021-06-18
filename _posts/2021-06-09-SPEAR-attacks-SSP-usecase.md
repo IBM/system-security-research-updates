@@ -162,7 +162,7 @@ receive) by probing the shared memory area for cached data.
 
 Spectre v1 gadgets are scarce, but
 they are simple enough to be built by chaining together ROP gadgets.
-At high level, the Spectre v1 gadget performs an array access. The array
+At a high level, the Spectre v1 gadget performs an array access. The array
 size is usually 256 so that it covers all byte values. The size of each
 array entry is 256B[^spectrearray]. The low level code for the Spectre
 v1 gadget is shown below.
@@ -282,7 +282,7 @@ because of the subsequent LIFO (Last In, First Out) release from TLB
 (Translation Lookaside Buffer).
 
 Knowing the deallocator behaviour, we craft the attacker virtual memory space
-in such a way that, the target TLS page lands on a fixed location in the 0-order free list
+in such a way that the target TLS page lands on a fixed location in the 0-order free list
 after attacker memory deallocation. We refer to the fixed location index
 in the 0-order freelist as _K_. _K_ is chosen such that
 during victim's process memory request for the TLS page frame, the
