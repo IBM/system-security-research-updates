@@ -1,11 +1,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/syntax.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/monokai.css">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom.css">
   <script src="https://kit.fontawesome.com/a60bcfbb87.js" crossorigin="anonymous"></script>
@@ -27,15 +26,15 @@
         - {{ site.description | escape }}
       {% endunless %}
     </title>
-  
-  
 
-  
+
+
+
   <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.baseurl }}/atom.xml">
   <link rel="alternate" type="application/json" title="{{ site.title }}" href="{{ "/feed.json" | prepend: site.baseurl | prepend: site.url }}" />
   <link rel="sitemap" type="application/xml" title="sitemap" href="{{ site.baseurl }}/sitemap.xml" />
-      
+
   {% if site.googlewebfonts %}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family={{ site.googlewebfonts }}&display=swap" rel="stylesheet">
