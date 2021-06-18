@@ -67,13 +67,13 @@ and describe ways of achieving them in a real world environment, against
 a real world target, unlike existing PoC attacks against Spectre-type
 vulnerabilities which employ artificial methods to overcome these conditions.
 We identify three attack preconditions:
-* large enough speculation window: the attacker will typically achieve this by evicting data required to determine the outcome of the conditional branch. The attacker must thus be able to evict
+1. large enough speculation window: the attacker will typically achieve this by evicting data required to determine the outcome of the conditional branch. The attacker must thus be able to evict
 arbitrary victim data from all cache levels (achieved in synthetic PoCs
 via the `clflush` or similar instructions)
-* the availability of an arbitrary read primitive; it must be part of victim's code and must execute
+1. the availability of an arbitrary read primitive; it must be part of victim's code and must execute
   inside the speculation window (synthetic PoCs usually compile the primitive
 together with the victim code)
-* a reliable side-channel; the most common choice is the
+1. a reliable side-channel; the most common choice is the
  CPU cache, whose state is changed by the arbitrary read primitive
 in such way that the attacker can later read the signal (the
 least noisy option often used in synthetic PoCs is a shared memory area
