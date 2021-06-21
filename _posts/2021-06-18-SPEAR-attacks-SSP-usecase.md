@@ -21,6 +21,8 @@ the SPEAR classification, the SSP attack falls under the _speculative
 control flow hijacking based on an architectural overwrite of a backward
 edge_ category.
 
+[Extended work](https://arxiv.org/abs/2003.05503)
+
 ## Background: bypassing stack smashing protection
 SSP is a mitigation against traditional stack buffer overflow attacks.
 Its design is simple: in each function prologue, write a randomly
@@ -477,7 +479,7 @@ misprediction occurs.
 
 For more information about SPEAR attacks, please refer to our [paper](https://arxiv.org/abs/2003.05503).
 
-## References
+## Endnotes
 
 [^cve20040597]: We chose this particular CVE because it provides a large enough out-of-bounds write to fit the attack payload. In practice the stack buffer overflow must allow overwrite of the return address which is sufficient for stack pivoting.
 
