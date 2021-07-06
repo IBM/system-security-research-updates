@@ -29,8 +29,16 @@ layout: default
   {{ content }}
 </section>
 
-<section>
+{% if page.bibtex %}
+<h1>Cite this article</h1>
+</div>
+<div class="control">
+  <textarea class="textarea" rows="11" readonly>{{ page.bibtex }}</textarea>
+</div>
+</section>
+{% endif %}
 
+<section>
   <nav class="post-nav">
     {% if page.previous %}
     <a class="post-nav-item post-nav-prev" href="{{ page.previous | relative_url }}">
@@ -46,3 +54,5 @@ layout: default
 
   </nav>
 </section>
+
+
