@@ -16,3 +16,12 @@
     margin: auto;
     width: 70%;
 }
+
+.textarea{
+    font-family: Hack, monospace;
+}
+
+pre {
+    font-size: 1em;
+    color: #6cea56;
+}
