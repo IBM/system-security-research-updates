@@ -2,7 +2,17 @@
 title: SPEAR attacks - stack smashing protector bypass usecase
 tags: security transient-execution
 authors: ["Alexandra",  "Andrea", "Alessandro", "Anil"]
-
+bibtex: |
+    @INPROCEEDINGS{eurosp2021spear,
+        author={Mambretti, Andrea and Sandulescu, Alexandra and Sorniotti, Alessandro and Robertson, William and Kirda, Engin and Kurmus, Anil},
+        booktitle={(to appear) 2021 IEEE European Symposium on Security and Privacy (IEEE EuroS&P)},
+        title={Bypassing memory safety mechanisms through speculative control flow hijacks},
+        year={2021},
+        volume={},
+        number={},
+        pages={},
+        doi={}
+    }
 ---
 # Bypassing stack smashing protection through speculative control flow hijacking
 This work demonstrates a local arbitrary read attack through speculative
