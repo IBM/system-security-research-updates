@@ -15,7 +15,11 @@ layout: default
   <span class="meta">
       Author{% if page.authors.size > 1 %}s{% endif %}:
       {% for author in page.authors %}
+        {% if page.websites[forloop.index0]  and page.websites[forloop.index0] != "" %}
+        <a href="{{page.websites[forloop.index0]}}">{{author}}</a>{% unless forloop.last %},{% endunless %}
+        {% else %}
         <a href="{{site.baseurl}}/about">{{author}}</a>{% unless forloop.last %},{% endunless %}
+        {% endif %}
       {% endfor%}
       <br/><br />
       {% if page.tags.size != 0 %}
