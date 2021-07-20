@@ -571,7 +571,7 @@ because their only small factor is *2*.[^7]
 
 But the same idea can be applied to the ephemeral exponent *y*, and it
 appears that this risk was overlooked in the OpenPGP ecosystem.  In
-practice, this leads to plain text recovery in a context where two
+practice, this leads to plaintext recovery in a context where two
 OpenPGP libraries, one sender and one receiver, interact, and:
 
 1. The receiver's public key defines a prime such that **_p – 1_ contains
@@ -582,7 +582,7 @@ OpenPGP libraries, one sender and one receiver, interact, and:
 3. The sender's library uses **short ephemeral exponents** *y*.
 
 After computing the discrete log *y* as previously sketched,
-recovering the plain text message is an easy exercise.
+recovering the plaintext message is an easy exercise.
 
 Looking at [Table 1](#bingo) we see that two libraries, Libgcrypt and
 Crypto++, can play the role of the sender, and that two types of
@@ -605,7 +605,7 @@ paper](https://eprint.iacr.org/2021/923) contains a careful analysis
 of the computational effort expected for each of the affected keys.
 As a proof of concept, we picked the weakest key we could find in the
 key dump and we encrypted a message to it using Crypto++.  We were
-able to **recover the plain text in 2.5 hours on a single Intel
+able to **recover the plaintext in 2.5 hours on a single Intel
 E5-2640 core**.
 
 
