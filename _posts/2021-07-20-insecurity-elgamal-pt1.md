@@ -486,13 +486,13 @@ for discrete logarithms in groups of composite order, and of Shanks'
 algorithm](https://en.wikipedia.org/wiki/Baby-step_giant-step).[^4]
 
 [^4]: In the [CCS '21 paper](https://eprint.iacr.org/2021/923) we use
-the more specialized [Pollard
-Lambda](https://en.wikipedia.org/wiki/Pollard%27s_kangaroo_algorithm)
-and van Oorschot and Wiener's ["Parallel collision
-search"](https://doi.org/10.1007/PL00003816) algorithms to analyze the
-impact of our attacks.  These can save a considerable amount of memory
-compared to Baby-step giant-step, and parallelize better, but they are
-not essential to understanding the attacks.
+	the more specialized [Pollard
+	Lambda](https://en.wikipedia.org/wiki/Pollard%27s_kangaroo_algorithm)
+	and van Oorschot and Wiener's ["Parallel collision
+	search"](https://doi.org/10.1007/PL00003816) algorithms to analyze
+	the impact of our attacks.  These can save a considerable amount
+	of memory compared to Baby-step giant-step, and parallelize
+	better, but they are not essential to understanding the attacks.
 
 As usual, we are given *g* and *h = g<sup>z</sup>*, and our goal is to
 find *z*.  If *z* is drawn from a set *Z* of size *N*, Baby-step
