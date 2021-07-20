@@ -753,3 +753,7 @@ $link-color: var(--link-color);
 }
 
 ul{list-style:unset}
+
+table th {
+	color: var(--main-text-color);
+}
