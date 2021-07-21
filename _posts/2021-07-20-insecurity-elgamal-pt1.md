@@ -29,7 +29,7 @@ implementations interact in an insecure way, leading to plaintext
 recovery given a single ciphertext.  Luckily, the majority of PGP
 users seems to be unaffected, nevertheless we found more than 2000
 vulnerable public keys. The second type of vulnerability, to be
-described in [Part II of this post](../../08/03/insecurity-elgamal-pt2), is a classical
+described in Part II of this post (coming soon), is a classical
 *side-channel vulnerability* leading to secret key recovery, however
 we argue there that the cross-configuration scenario makes it worse.
 
@@ -499,8 +499,8 @@ As usual, we are given *g* and *h = g<sup>z</sup>*, and our goal is to
 find *z*.  If *z* is drawn from a set *Z* of size *N*, Baby-step
 giant-step finds it in roughly *N<sup>½</sup>* operations.  Its
 strength is in requiring roughly the same amount of work no matter how
-complicated the set *Z* is.  For example, we will use it in the [next
-part of this blog post](../../08/03/insecurity-elgamal-pt2) to **find *z* when some of its
+complicated the set *Z* is.  For example, we will use it in the next
+part of this blog post to **find *z* when some of its
 bits are known** via a side-channel.
 
 Pohlig–Hellman will be useful in a slightly more involved scenario,
