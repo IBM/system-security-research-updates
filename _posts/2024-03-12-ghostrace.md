@@ -18,6 +18,6 @@ Our key finding is that all the common synchronization primitives implemented us
 
 [As in previous work]({% link _posts/2021-06-18-SPEAR-attacks-SSP-usecase.md %}), this demonstrates the power attackers can have in combining memory corruption attacks - here concurrent use-after-free - with memory corruption attacks.
   
-Read our upcoming [USENIX Security'24 paper](https://download.vusec.net/papers/ghostrace_sec24.pdf) for more details, including scripts to find vulnerable gadgets, our suggested mitigation, and the mitigation plans for Linux.
+Read our upcoming [USENIX Security'24 paper](https://download.vusec.net/papers/ghostrace_sec24.pdf) and [Github repo](https://github.com/vusec/ghostrace) for more details, including scripts to find vulnerable gadgets, our suggested mitigation, and the mitigation plans for Linux.
 
 # Endnotes
