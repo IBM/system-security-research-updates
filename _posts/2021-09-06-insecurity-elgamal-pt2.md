@@ -20,7 +20,7 @@ bibtex: |
 
 This post continues the description of our work that analyses the security 
 of the ElGamal public key encryption scheme in the OpenPGP context. In the 
-[previous post](../../07/20/insecurity-elgamal-pt1) we discussed attacks
+[previous post]({% link _posts/2021-07-20-insecurity-elgamal-pt1.md %}) we discussed attacks
 targeting weak combinations of parameter 
 choices and we saw how ciphertexts generated under those settings could be 
 recovered easily.

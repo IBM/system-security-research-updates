@@ -29,7 +29,7 @@ implementations interact in an insecure way, leading to plaintext
 recovery given a single ciphertext.  Luckily, the majority of PGP
 users seems to be unaffected, nevertheless we found more than 2000
 vulnerable public keys. The second type of vulnerability, to be
-described in [Part II](../../09/06/insecurity-elgamal-pt2) of this
+described in [Part II]({% link _posts/2021-09-06-insecurity-elgamal-pt2.md %}) of this
 post, is a classical
 *side-channel vulnerability* leading to secret key recovery, however
 we argue there that the cross-configuration scenario makes it worse.
