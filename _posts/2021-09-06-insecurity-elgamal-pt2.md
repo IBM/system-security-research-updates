@@ -6,7 +6,7 @@ websites: ["https://defeo.lu/", "https://researcher.watson.ibm.com/researcher/vi
 bibtex: |
     @INPROCEEDINGS{CCS2021ElGamal,
         author={De Feo, Luca and Poettering, Bertram and Sorniotti, Alessandro},
-        booktitle={(to appear) 2021 ACM Conference on Computer and Communications Security (ACM CCS'21)},
+        booktitle={2021 ACM Conference on Computer and Communications Security (ACM CCS'21)},
         title={On the (in)security of ElGamal in OpenPGP},
         year={2021},
         volume={},
